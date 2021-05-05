@@ -11,7 +11,7 @@ before_install:
         - sudo apt install p7zip-full
         - 7z x -ot web_log.tsv.7z
 script:
-        -ls -l
+        - ls -l
         - echo ":***************************************one***************************************:"
         - shellcheck shcode/imagepro.sh
         - bash shcode/imagepro.sh -h -q -r -m "star" -p "head" -s "tail" -t

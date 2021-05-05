@@ -1,0 +1,29 @@
+language: bash
+
+os:
+- linux
+
+before_install:
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/worldcupplayerinfo.tsv"
+        - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/web_log.tsv.7z"
+        - sudo apt-get update && sudo apt install shellcheck
+        - sudo apt install imagemagick
+        - sudo apt install p7zip-full
+        - 7z x -ot web_log.tsv.7z
+script:
+        -ls -l
+        - echo ":***************************************one***************************************:"
+        - shellcheck shcode/imagepro.sh
+        - bash shcode/imagepro.sh -h -q -r -m "star" -p "head" -s "tail" -t
+        - ls -l
+        - echo ":***************************************two***************************************:"
+        - shellcheck shcode/dataprocess.sh
+        - bash shcode/dataprocess.sh -h -a -p -n -A
+        - ls -l
+        - echo ":***************************************three***************************************:"
+        - shellcheck shcode/weblog.sh
+        - bash shcode/weblog.sh -h -t -i -f -s -u -U "/images/USA-logosmall.gif"
+        - ls -l
+        notifications:
+                email:
+                        on_success: never
